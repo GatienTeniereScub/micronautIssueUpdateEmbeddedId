@@ -27,3 +27,8 @@ Update John Doe to Jane Doe
       String firstName: 'Jane'
       String lastName: 'Doe'
     }
+
+Issue :
+
+    ERROR i.m.h.s.netty.RoutingInBoundHandler - Unexpected error occurred: Cannot perform update for non-existent property: Employee.id.companyId
+    java.lang.IllegalStateException: Cannot perform update for non-existent property: Employee.id.companyId

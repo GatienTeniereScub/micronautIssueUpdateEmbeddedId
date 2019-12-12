@@ -1,0 +1,65 @@
+plugins {
+    id "groovy"
+    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "application"
+}
+
+
+
+version "0.1"
+group "updatewithembeddedid"
+
+repositories {
+    mavenCentral()
+    maven { url "https://jcenter.bintray.com" }
+}
+
+configurations {
+    // for dependencies that are needed for development only
+    developmentOnly 
+}
+
+dependencies {
+    compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    compileOnly "io.micronaut:micronaut-inject-groovy"
+    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation "io.micronaut:micronaut-runtime-groovy"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "javax.annotation:javax.annotation-api"
+    implementation "io.micronaut:micronaut-http-server-netty"
+    implementation "io.micronaut:micronaut-http-client"
+    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
+    testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation("org.spockframework:spock-core") {
+        exclude group: "org.codehaus.groovy", module: "groovy-all"
+    }
+    testImplementation "io.micronaut:micronaut-inject-groovy"
+    testImplementation "io.micronaut.test:micronaut-test-spock"
+    testImplementation "io.micronaut.test:micronaut-test-junit5"
+    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.5.0"
+
+    /*  Data  */
+    annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0.M5'
+    compileOnly "io.micronaut.data:micronaut-data-processor:1.0.0.M5"
+    implementation group: 'io.micronaut.data', name: 'micronaut-data-jdbc', version: '1.0.0.M5'
+    implementation fileTree(dir: 'libs', include: ['ojdbc*.jar']) // Oracle driver
+    runtime group: 'io.micronaut.configuration', name: 'micronaut-jdbc-hikari'
+    implementation 'org.codehaus.groovy:groovy-sql:2.5.2'
+    runtime 'com.h2database:h2'
+
+}
+
+test.classpath += configurations.developmentOnly
+
+mainClassName = "updatewithembeddedid.Application"
+tasks.withType(GroovyCompile) {
+    groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+run.classpath += configurations.developmentOnly
+run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')

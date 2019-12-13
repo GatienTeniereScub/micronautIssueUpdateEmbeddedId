@@ -43,7 +43,6 @@ dependencies {
     annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0.M5'
     compileOnly "io.micronaut.data:micronaut-data-processor:1.0.0.M5"
     implementation group: 'io.micronaut.data', name: 'micronaut-data-jdbc', version: '1.0.0.M5'
-    implementation fileTree(dir: 'libs', include: ['ojdbc*.jar']) // Oracle driver
     runtime group: 'io.micronaut.configuration', name: 'micronaut-jdbc-hikari'
     implementation 'org.codehaus.groovy:groovy-sql:2.5.2'
     runtime 'com.h2database:h2'

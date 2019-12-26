@@ -41,10 +41,12 @@ dependencies {
 
     /*  Data  */
     annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0.M5'
+    annotationProcessor "javax.persistence:javax.persistence-api:2.2"
     compileOnly "io.micronaut.data:micronaut-data-processor:1.0.0.M5"
     implementation group: 'io.micronaut.data', name: 'micronaut-data-jdbc', version: '1.0.0.M5'
     runtime group: 'io.micronaut.configuration', name: 'micronaut-jdbc-hikari'
     implementation 'org.codehaus.groovy:groovy-sql:2.5.2'
+    compile 'io.micronaut.configuration:micronaut-hibernate-jpa'
     runtime 'com.h2database:h2'
 
 }

@@ -5,8 +5,9 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 import updatewithembeddedid.entity.Employee
 import updatewithembeddedid.entity.EmployeeEmbeddedId
+import updatewithembeddedid.entity.EmployeeEntity
 
 @JdbcRepository(dialect = Dialect.H2)
-abstract class EmployeeRepository implements CrudRepository<Employee, EmployeeEmbeddedId> {
+abstract class EmployeeRepository implements CrudRepository<EmployeeEntity, EmployeeEmbeddedId> {
 
 }

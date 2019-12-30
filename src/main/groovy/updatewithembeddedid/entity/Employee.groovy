@@ -1,14 +1,20 @@
 package updatewithembeddedid.entity
 
-import io.micronaut.data.annotation.EmbeddedId
-import io.micronaut.data.annotation.MappedEntity
+import javax.persistence.CascadeType
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
+import javax.persistence.JoinColumn
+import javax.persistence.OneToOne
+import javax.persistence.Table
 
-@MappedEntity(value = 'EMPLOYE')
+@Entity
+@Table(name = 'SALARIE')
 class Employee {
+
     @EmbeddedId
     EmployeeEmbeddedId id
 
-    String lastName
-
-    String firstName
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "INDIVIDU_ID", referencedColumnName = "INDIVIDU")
+    Individual individual
 }

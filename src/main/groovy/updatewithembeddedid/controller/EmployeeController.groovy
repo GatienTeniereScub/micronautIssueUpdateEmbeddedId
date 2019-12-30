@@ -4,6 +4,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import updatewithembeddedid.entity.Employee
 import updatewithembeddedid.entity.EmployeeEmbeddedId
+import updatewithembeddedid.entity.Individual
 import updatewithembeddedid.repository.EmployeeRepository
 
 import javax.inject.Inject
@@ -20,15 +21,17 @@ class EmployeeController {
 
     @Get('/find')
     Employee findJohnDoe () {
-        employeeRepository.findById(idJohnDoe).get()
+        employeeRepository.findById(idJohnDoe)
     }
 
     @Get('/insert')
     void insertJohnDoe() {
         Employee employee = new Employee();
         employee.id = idJohnDoe
-        employee.firstName = 'John'
-        employee.lastName = 'Doe'
+        employee.individual = new Individual()
+        employee.individual.id = 1
+        employee.individual.firstName = 'John'
+        employee.individual.lastName = 'Doe'
 
         employeeRepository.save(employee)
     }
@@ -37,8 +40,10 @@ class EmployeeController {
     void updateJohnDoeToJaneDoe () {
         Employee employee = new Employee();
         employee.id = idJohnDoe
-        employee.firstName = 'Jane'
-        employee.lastName = 'Doe'
+        employee.individual = new Individual()
+        employee.individual.id = 1
+        employee.individual.firstName = 'Jane'
+        employee.individual.lastName = 'Doe'
 
         employeeRepository.update(employee)
     }

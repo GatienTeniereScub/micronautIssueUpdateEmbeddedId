@@ -1,12 +1,14 @@
 package updatewithembeddedid.entity
 
-import io.micronaut.data.annotation.Embeddable
+import javax.persistence.Embeddable
 
 @Embeddable
-class EmployeeEmbeddedId {
+class EmployeeEmbeddedId implements Serializable {
     String companyId
 
     String individualId
+
+    EmployeeEmbeddedId() {}
 
     EmployeeEmbeddedId(String companyId, String individualId) {
         this.companyId = companyId
